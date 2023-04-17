@@ -10,9 +10,7 @@ function App() {
   return (
     <div className="App">
       <Product product={product}/>
-      {product.status}
-      {/* <pre>{JSON.stringify(product.entities)}</pre> */}
-      {/* <p>{product.limit}</p> */}
+      <p>{product.status}</p>
       <button 
         onClick={()=> {
           dispatch(getProductAsync(`https://dummyjson.com/products?limit=${product.limit}`))

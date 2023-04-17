@@ -1,0 +1,71 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap');
+.product {
+  font-family: 'Roboto', sans-serif;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 25px 0px;
+  padding: 50px 0px;
+  color: var(--text-color);
+
+  &__wrap {
+    padding: 15px 10px 0px;
+  }
+  &__item {
+    flex: 0 0 30%;
+    align-self: stretch;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    text-align: center;
+    box-shadow: rgba(0, 0, 0, 0.15) 0px 5px 15px 0px;
+    border-radius: 10px;
+    overflow: hidden;
+  }
+  &__thumbnail {
+    width: 80%;
+    margin: 0 auto 15px;
+    img{
+      width: 100%;
+      aspect-ratio: 1;
+      object-fit: contain;
+    }
+  }
+  &__title,&__price {
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--primary-color);
+    margin-bottom: 15px;
+  }
+  &__desc {
+    margin-bottom: 15px;
+  }
+  &__info {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    margin-bottom: 25px;
+    svg {
+      color: var(--primary-color);
+    }
+  }
+  &__btn {
+    cursor: pointer;
+    font-family: "Roboto", sans-serif;
+    font-weight: 700;
+    font-size: 17px;
+    background-color: var(--primary-color);
+    width: 100%;
+    border: 2px solid var(--primary-color);
+    border-radius: 0px 0px 10px 10px;
+    padding: 10px 0px;
+    color: var(--bg-color);
+
+    transition: color 150ms linear, background-color 200ms ease;
+    &:hover {
+      background-color: var(--bg-color);
+      color: var(--primary-color);
+    }
+  }
+}
