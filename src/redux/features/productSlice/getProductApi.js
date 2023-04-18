@@ -1,4 +1,10 @@
+import axios from "axios"
+
 export const fetchProductApi = (url) => {
   
-  return fetch(url).then(response => response.json()).then(json => json)
+  return axios.get(url,{
+    params: {
+      limit: 100
+    }
+    }).then(response => response.data)
 }

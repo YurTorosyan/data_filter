@@ -11,3 +11,35 @@ body {
   background-image: linear-gradient(to top, #e6e9f0 0%, #eef1f5 100%);
   background-attachment: fixed;
 }
+.App {
+  font-family: "Roboto", sans-serif;
+  color: var(--text-color);
+}
+.App > h1 {
+  color: var(--primary-color);
+  text-align: center;
+  padding: 20px 0px 10px;
+}
+.App > button {
+  display: block;
+  margin: 0 auto;
+  cursor: pointer;
+  font-family: "Roboto", sans-serif;
+  font-weight: 700;
+  font-size: 17px;
+  background-color: var(--primary-color);
+  border: 2px solid var(--primary-color);
+  border-radius: 5px;
+  padding: 5px 10px;
+  color: var(--bg-color);
+
+  transition: color 150ms linear, background-color 200ms ease;
+}
+.App > button:hover {
+  background-color: var(--bg-color);
+  color: var(--primary-color);
+}
+.App > p {
+  text-align: center;
+  margin-bottom: 15px;
+}

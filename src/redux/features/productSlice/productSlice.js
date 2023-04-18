@@ -2,21 +2,22 @@ import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { fetchProductApi } from "./getProductApi";
 
 const initialState = {
-  entities: [
-    {"id":1,"title":"iPhone 9","description":"An apple mobile which is nothing like apple","price":549,"discountPercentage":12.96,"rating":4.69,"stock":94,"brand":"Apple","category":"smartphones","thumbnail":"https://i.dummyjson.com/data/products/1/thumbnail.jpg","images":["https://i.dummyjson.com/data/products/1/1.jpg","https://i.dummyjson.com/data/products/1/2.jpg","https://i.dummyjson.com/data/products/1/3.jpg","https://i.dummyjson.com/data/products/1/4.jpg","https://i.dummyjson.com/data/products/1/thumbnail.jpg"]},
-    {"id":1,"title":"iPhone 9","description":"An apple mobile which is nothing like apple","price":549,"discountPercentage":12.96,"rating":4.69,"stock":94,"brand":"Apple","category":"smartphones","thumbnail":"https://i.dummyjson.com/data/products/1/thumbnail.jpg","images":["https://i.dummyjson.com/data/products/1/1.jpg","https://i.dummyjson.com/data/products/1/2.jpg","https://i.dummyjson.com/data/products/1/3.jpg","https://i.dummyjson.com/data/products/1/4.jpg","https://i.dummyjson.com/data/products/1/thumbnail.jpg"]},
-    {"id":1,"title":"iPhone 9","description":"An apple mobile which is nothing like apple","price":549,"discountPercentage":12.96,"rating":4.69,"stock":94,"brand":"Apple","category":"smartphones","thumbnail":"https://i.dummyjson.com/data/products/1/thumbnail.jpg","images":["https://i.dummyjson.com/data/products/1/1.jpg","https://i.dummyjson.com/data/products/1/2.jpg","https://i.dummyjson.com/data/products/1/3.jpg","https://i.dummyjson.com/data/products/1/4.jpg","https://i.dummyjson.com/data/products/1/thumbnail.jpg"]},
-  ],
-  limit: 0,
+  data: [],
+  entities: [],
+  categories: [],
   status: null
 }
 
 export const getProductAsync = createAsyncThunk(
   "PRODUCT/getProduct",
   async (url) => {
-    const response = fetchProductApi(url)
-    console.log(url)
-    return response
+    const products = await fetchProductApi(url)
+    const categories = await fetchProductApi(url + "/categories")
+
+    return {
+      products: products.products,
+      categories
+    }
   }
 )
 
@@ -24,11 +25,13 @@ const productSlice = createSlice({
   name: "PRODUCT",
   initialState,
   reducers: {
-    addLimit(state, action) {
-      if(state.limit < 100){
-        state.limit = state.limit + 10
+    filterData(state, action) {
+      console.log(action.payload)
+      if(action.payload === "all"){
+        return {...state, entities: [...state.data]}
       }
-      return state
+      const filteredEntities = state.data.filter(elem => elem.category === action.payload)
+      return {...state, entities: filteredEntities}
     }
   },
   extraReducers: (builder) => {
@@ -38,9 +41,10 @@ const productSlice = createSlice({
         return state
       })
       .addCase(getProductAsync.fulfilled, (state, action) => {
-        // console.log(action.payload.products)
         return {
           ...state,
+          categories: action.payload.categories,
+          data: action.payload.products,
           entities: action.payload.products,
           status: "Products are Loaded"
         }
@@ -52,5 +56,5 @@ const productSlice = createSlice({
   }
 })
 
-export const { addLimit } = productSlice.actions
+export const { filterData } = productSlice.actions
 export default productSlice.reducer 

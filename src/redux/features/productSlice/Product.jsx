@@ -1,33 +1,35 @@
+import React from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCopyright, faFolderOpen, faStarHalfStroke} from '@fortawesome/free-solid-svg-icons'
-import React from 'react'
+
 import "./Product.scss"
 
-function Product({ product }) {
-  
+
+function Product({product}) {
   return (
     <div className='product'>
-      {product.entities.map(elem => {
-        return (
-        <div className="product__item" key={crypto.randomUUID()}>
-          <div className="product__wrap">
-            <div className="product__thumbnail">
-              <img src={elem.thumbnail} alt="Thumbnail"/>
+      <div className="product__wrap">
+        {product.entities.map(elem => {
+          return (
+          <div className="product__item" key={crypto.randomUUID()}>
+              <div className="product__thumbnail">
+                <img src={elem.thumbnail} alt="Thumbnail"/>
+              </div>
+            <div className="product__content">
+              <h3 className='product__title'>{elem.title}</h3>
+              <p className='product__desc'>{elem.description}</p>
+              <p className='product__price'>${elem.price}</p>
+              <div className="product__info">
+                <p className="product__rating"><FontAwesomeIcon icon={faStarHalfStroke} /> {elem.rating}</p>
+                <p className="product__brand"><FontAwesomeIcon icon={faCopyright} /> {elem.brand}</p>
+                <p className="product__category"><FontAwesomeIcon icon={faFolderOpen} /> {elem.category}</p>
+              </div>
             </div>
-            <h3 className='product__title'>{elem.title}</h3>
-            <p className='product__desc'>{elem.description}</p>
-            <p className='product__price'>${elem.price}</p>
-            <div className="product__info">
-              <p className="product__rating"><FontAwesomeIcon icon={faStarHalfStroke} /> {elem.rating}</p>
-              <p className="product__brand"><FontAwesomeIcon icon={faCopyright} /> {elem.brand}</p>
-              <p className="product__category"><FontAwesomeIcon icon={faFolderOpen} /> {elem.category}</p>
-            </div>
+            <button className='product__btn'>Add to Cart</button>
           </div>
-          
-          <button className='product__btn'>Add to Cart</button>
-        </div>
-        )
-      })}
+          )
+        })}
+      </div>
     </div>
   )
 }
